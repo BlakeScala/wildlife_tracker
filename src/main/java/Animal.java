@@ -5,9 +5,12 @@ import java.util.List;
 public class Animal {
   public int id;
   public String name;
+  public String type;
+  public static final String DATABASE_TYPE = "not endangered";
 
   public Animal(String name) {
     this.name = name;
+    type = DATABASE_TYPE;
   }
 
   public String getName() {
@@ -32,15 +35,18 @@ public class Animal {
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT * FROM animals";
       return con.createQuery(sql)
+        .throwOnMappingFailure(false)
         .executeAndFetch(Animal.class);
     }
   }
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO animals (name) VALUES (:name)";
+      String sql = "INSERT INTO animals (name, type) VALUES (:name, :type)";
       this.id = (int) con.createQuery(sql, true)
         .addParameter("name", this.name)
+        .addParameter("type", this.type)
+        .throwOnMappingFailure(false)
         .executeUpdate()
         .getKey();
     }
@@ -51,6 +57,7 @@ public class Animal {
       String sql = "SELECT * FROM animals WHERE id = :id";
       return con.createQuery(sql)
         .addParameter("id", id)
+        .throwOnMappingFailure(false)
         .executeAndFetchFirst(Animal.class);
     }
   }
