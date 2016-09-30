@@ -14,4 +14,10 @@ public class AnimalTest {
     Animal animal = new Animal("Brown Bear");
     assertTrue(animal instanceof Animal);
   }
+
+  @Test
+  public void getName_returnsName_true() {
+    Animal animal = new Animal("Brown Bear");
+    AssertEquals("Brown Bear", animal.getName());
+  }
 }
