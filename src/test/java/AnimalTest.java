@@ -67,4 +67,14 @@ public class AnimalTest {
     animal.updateName("Black Bear");
     assertEquals(animal.getName(), "Black Bear");
   }
+
+  @Test
+  public void getSightings_returnsAllSightings() {
+    Animal animal = new Animal("Brown Bear");
+    animal.save();
+    Sighting sighting = new Sighting("NE Quadrant", "Joe", animal.getId());
+    Sighting sightingTwo = new Sighting("NE Quadrant", "Jerry", animal.getId());
+    animal.getSightings().contains(sighting);
+    animal.getSightings().contains(sightingTwo);
+  }
 }

@@ -51,6 +51,9 @@ public class EndangeredAnimal extends Animal {
 
   @Override
   public void save() {
+    if (!(this.health.equals(HEALTH_ILL) || this.health.equals(HEALTH_OKAY) || this.health.equals(HEALTH_HEALTHY))) {
+      throw new IllegalArgumentException("Please enter 'healthy', 'okay', or 'ill'");
+    }
     try(Connection con = DB.sql2o.open()) {
       String sql = "INSERT INTO animals (name, type, health, age) VALUES (:name, :type, :health, :age)";
       this.id = (int) con.createQuery(sql, true)

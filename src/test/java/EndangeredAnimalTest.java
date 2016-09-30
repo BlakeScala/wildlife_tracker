@@ -103,9 +103,15 @@ public class EndangeredAnimalTest {
 
   @Test
   public void endangeredAnimalIsOkay_returnsFalseIfAnimalIsIll() {
-    EndangeredAnimal animal = new EndangeredAnimal("Rattlesnake", "healthy", "ill");
+    EndangeredAnimal animal = new EndangeredAnimal("Rattlesnake", "ill", "young");
     animal.save();
     animal.endangeredAnimalIsOkay("ill");
     assertEquals(false, animal.endangeredAnimalIsOkay("ill"));
   }
+
+  // @Test(excepted = IllegalArgumentException.class)
+  // public void save_throwsExceptionIfArgumentIsNotAConstant() {
+  //   EndangeredAnimal animal = new EndangeredAnimal("Rattlesnake", "not doing well", "young");
+  //   animal.save();
+  // }
 }
