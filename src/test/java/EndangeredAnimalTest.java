@@ -100,4 +100,12 @@ public class EndangeredAnimalTest {
     animal.delete();
     assertEquals(null, EndangeredAnimal.find(animal.getId()));
   }
+
+  @Test
+  public void endangeredAnimalIsOkay_returnsFalseIfAnimalIsIll() {
+    EndangeredAnimal animal = new EndangeredAnimal("Rattlesnake", "healthy", "ill");
+    animal.save();
+    animal.endangeredAnimalIsOkay("ill");
+    assertEquals(false, animal.endangeredAnimalIsOkay("ill"));
+  }
 }

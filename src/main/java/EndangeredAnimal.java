@@ -41,6 +41,14 @@ public class EndangeredAnimal extends Animal {
     }
   }
 
+  public boolean endangeredAnimalIsOkay(String healthLevel) {
+    if (healthLevel == HEALTH_ILL) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   @Override
   public void save() {
     try(Connection con = DB.sql2o.open()) {

@@ -80,4 +80,6 @@ public class SightingTest {
     sighting.delete();
     assertEquals(null, Sighting.find(sighting.getId()));
   }
+
+  
 }
