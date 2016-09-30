@@ -42,4 +42,13 @@ public class AnimalTest {
     Animal savedAnimal = Animal.all().get(0);
     assertEquals(animal.getId(), savedAnimal.getId());
   }
+
+  @Test
+  public void find_findsCorrectAnimal() {
+    Animal animal = new Animal("Brown Bear");
+    Animal animalTwo = new Animal("Brown Bear");
+    animal.save();
+    animalTwo.save();
+    assertEquals(Animal.find(animalTwo.getId()), animalTwo);
+  }
 }

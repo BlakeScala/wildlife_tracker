@@ -45,4 +45,13 @@ public class Animal {
         .getKey();
     }
   }
+
+  public static Animal find (int id) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM animals WHERE id = :id";
+      return con.createQuery(sql)
+        .addParameter("id", id)
+        .executeAndFetchFirst(Animal.class);
+    }
+  }
 }
