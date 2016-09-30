@@ -92,4 +92,12 @@ public class EndangeredAnimalTest {
     animal.updateAge("adult");
     assertEquals("adult", EndangeredAnimal.find(animal.getId()).getAge());
   }
+
+  @Test
+  public void delete_deletesAnimal() {
+    EndangeredAnimal animal = new EndangeredAnimal("Rattlesnake", "healthy", "young");
+    animal.save();
+    animal.delete();
+    assertEquals(null, EndangeredAnimal.find(animal.getId()));
+  }
 }
