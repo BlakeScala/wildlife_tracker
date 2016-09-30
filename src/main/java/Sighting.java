@@ -19,4 +19,16 @@ public class Sighting {
     this.animalId = animalId;
     this.time = new Timestamp(new Date().getTime());
   }
+
+  public String getLocation() {
+    return location;
+  }
+
+  public String getRangerName() {
+    return rangerName;
+  }
+
+  public int getAnimalId() {
+    return animalId;
+  }
 }

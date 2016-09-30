@@ -14,4 +14,22 @@ public class SightingTest {
     Sighting sighting = new Sighting("Near the river", "Jerry", 2);
     assertTrue(sighting instanceof Sighting);
   }
+
+  @Test
+  public void getLocation_returnsLocation() {
+    Sighting sighting = new Sighting("Near the river", "Jerry", 2);
+    assertEquals(sighting.getLocation(), "Near the river");
+  }
+
+  @Test
+  public void getRangerName_returnsRangerName() {
+    Sighting sighting = new Sighting("Near the river", "Jerry", 2);
+    assertEquals(sighting.getRangerName(), "Jerry");
+  }
+
+  @Test
+  public void getAnimalId_returnsAnimalId() {
+    Sighting sighting = new Sighting("Near the river", "Jerry", 2);
+    assertEquals(sighting.getAnimalId(), 2);
+  }
 }
