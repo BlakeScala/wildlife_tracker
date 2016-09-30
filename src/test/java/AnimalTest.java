@@ -18,6 +18,13 @@ public class AnimalTest {
   @Test
   public void getName_returnsName_true() {
     Animal animal = new Animal("Brown Bear");
-    AssertEquals("Brown Bear", animal.getName());
+    assertEquals("Brown Bear", animal.getName());
+  }
+
+  @Test
+  public void equals_returnsTrueIfAnimalsAreSame() {
+    Animal animal = new Animal("Brown Bear");
+    Animal animalTwo = new Animal("Brown Bear");
+    assertTrue(animal.equals(animalTwo));
   }
 }
