@@ -60,4 +60,12 @@ public class EndangeredAnimalTest {
     animalTwo.save();
     assertTrue(EndangeredAnimal.allEndangered().size() == 1);
   }
+
+  @Test
+  public void delete_deletesEndangeredAnimal() {
+    EndangeredAnimal animal = new EndangeredAnimal("Rattlesnake", "healthy", "adult");
+    animal.save();
+    animal.delete();
+    assertEquals(null, EndangeredAnimal.find(animal.getId()));
+  }
 }

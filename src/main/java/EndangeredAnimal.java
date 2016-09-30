@@ -21,6 +21,10 @@ public class EndangeredAnimal extends Animal {
     type = DATABASE_TYPE;
   }
 
+  public int getId() {
+    return id;
+  }
+
   public static List<EndangeredAnimal> allEndangered() {
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT * FROM animals WHERE type = 'endangered';";
