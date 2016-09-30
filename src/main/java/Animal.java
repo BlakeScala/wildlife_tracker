@@ -3,9 +3,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Animal {
-  
+  public int id;
+  public String name;
 
-  public Animal() {
-
+  public Animal(String name) {
+    this.name = name;
   }
 }
