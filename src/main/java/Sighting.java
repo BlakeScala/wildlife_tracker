@@ -31,4 +31,26 @@ public class Sighting {
   public int getAnimalId() {
     return animalId;
   }
+
+  public int getId() {
+    return id;
+  }
+
+  public Timestamp getTime() {
+    return time;
+  }
+
+  @Override
+  public boolean equals(Object otherSighting) {
+    if (!(otherSighting instanceof Sighting)) {
+      return false;
+    } else {
+      Sighting newSighting = (Sighting) otherSighting;
+      return this.getLocation().equals(newSighting.getLocation()) &&
+             this.getRangerName().equals(newSighting.getRangerName()) &&
+             this.getAnimalId() == (newSighting.getAnimalId()) &&
+             this.getId() == (newSighting.getId()) &&
+             this.getTime().equals(newSighting.getTime());
+    }
+  }
 }

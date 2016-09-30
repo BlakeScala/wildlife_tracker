@@ -32,4 +32,11 @@ public class SightingTest {
     Sighting sighting = new Sighting("Near the river", "Jerry", 2);
     assertEquals(sighting.getAnimalId(), 2);
   }
+
+  @Test
+  public void equals_returnsTrueIfSightingsAreSame() {
+    Sighting sighting = new Sighting("Near the river", "Jerry", 2);
+    Sighting sightingTwo = new Sighting("Near the river", "Jerry", 2);
+    assertTrue(sighting.equals(sightingTwo));
+  }
 }
