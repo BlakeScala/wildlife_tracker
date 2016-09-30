@@ -68,4 +68,11 @@ public class EndangeredAnimalTest {
     animal.delete();
     assertEquals(null, EndangeredAnimal.find(animal.getId()));
   }
+
+  @Test
+  public void updateName_updatesName() {
+    EndangeredAnimal animal = new EndangeredAnimal("Rattlesnake", "healthy", "adult");
+    animal.save();
+    animal.updateName("Diamondback Rattlesnake");
+  }
 }
