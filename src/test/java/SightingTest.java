@@ -54,4 +54,13 @@ public class SightingTest {
     Sighting savedSighting = Sighting.all().get(0);
     assertEquals(sighting.getId(), savedSighting.getId());
   }
+
+  @Test
+  public void all_returnsAllInstancesOfSighting() {
+    Sighting sighting = new Sighting("Near the river", "Jerry", 2);
+    sighting.save();
+    Sighting sightingTwo = new Sighting("NE Quadrant", "Jerry", 3);
+    sighting.save();
+    assertEquals(Sighting.all().size(), 2);
+  }
 }
