@@ -63,4 +63,14 @@ public class SightingTest {
     sighting.save();
     assertEquals(Sighting.all().size(), 2);
   }
+
+  @Test
+  public void find_findCorrectSighting() {
+    Sighting sighting = new Sighting("Near the river", "Jerry", 2);
+    sighting.save();
+    Sighting sightingTwo = new Sighting("Near the river", "Joe", 3);
+    sightingTwo.save();
+    assertEquals(Sighting.find(sightingTwo.getId()), sightingTwo);
+
+  }
 }
