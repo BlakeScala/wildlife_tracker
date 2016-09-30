@@ -51,4 +51,12 @@ public class AnimalTest {
     animalTwo.save();
     assertEquals(Animal.find(animalTwo.getId()), animalTwo);
   }
+
+  @Test
+  public void delete_deletesAnimal() {
+    Animal animal = new Animal("Brown Bear");
+    animal.save();
+    animal.delete();
+    assertEquals(null, Animal.find(animal.getId()));
+  }
 }
