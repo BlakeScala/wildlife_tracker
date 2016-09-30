@@ -71,6 +71,13 @@ public class SightingTest {
     Sighting sightingTwo = new Sighting("Near the river", "Joe", 3);
     sightingTwo.save();
     assertEquals(Sighting.find(sightingTwo.getId()), sightingTwo);
+  }
 
+  @Test
+  public void delete_deletesSighting() {
+    Sighting sighting = new Sighting("Near the river", "Jerry", 2);
+    sighting.save();
+    sighting.delete();
+    assertEquals(null, Sighting.find(sighting.getId()));
   }
 }
