@@ -70,4 +70,15 @@ public class Animal {
         .executeUpdate();
     }
   }
+
+  public void updateName(String name) {
+    this.name = name;
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "UPDATE animals SET name = :name WHERE id = :id";
+      con.createQuery(sql)
+        .addParameter("name", this.name)
+        .addParameter("id", this.id)
+        .executeUpdate();
+    }
+  }
 }
