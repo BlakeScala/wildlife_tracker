@@ -46,4 +46,12 @@ public class SightingTest {
     sighting.save();
     assertEquals(Sighting.all().get(0), sighting);
   }
+
+  @Test
+  public void save_assignsIdToSightings() {
+    Sighting sighting = new Sighting("Near the river", "Jerry", 2);
+    sighting.save();
+    Sighting savedSighting = Sighting.all().get(0);
+    assertEquals(sighting.getId(), savedSighting.getId());
+  }
 }
