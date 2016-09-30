@@ -29,6 +29,7 @@ public class EndangeredAnimal extends Animal {
     }
   }
 
+  @Override
   public void save() {
     try(Connection con = DB.sql2o.open()) {
       String sql = "INSERT INTO animals (name, type, health, age) VALUES (:name, :type, :health, :age)";

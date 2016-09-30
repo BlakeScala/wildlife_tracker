@@ -51,4 +51,13 @@ public class EndangeredAnimalTest {
     animalTwo.save();
     assertEquals(EndangeredAnimal.find(animalTwo.getId()), animalTwo);
   }
+
+  @Test
+  public void allEndangered_onlyReturnsEndangered() {
+    EndangeredAnimal animal = new EndangeredAnimal("Rattlesnake", "healthy", "adult");
+    Animal animalTwo = new Animal("Brown Bear");
+    animal.save();
+    animalTwo.save();
+    assertTrue(EndangeredAnimal.allEndangered().size() == 1);
+  }
 }
