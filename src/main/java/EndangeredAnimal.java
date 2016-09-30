@@ -29,6 +29,10 @@ public class EndangeredAnimal extends Animal {
     return health;
   }
 
+  public String getAge() {
+    return age;
+  }
+
   public static List<EndangeredAnimal> allEndangered() {
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT * FROM animals WHERE type = 'endangered';";
@@ -56,6 +60,16 @@ public class EndangeredAnimal extends Animal {
       String sql = "UPDATE animals SET health = :health WHERE id = :id";
       con.createQuery(sql)
         .addParameter("health", health)
+        .addParameter("id", this.id)
+        .executeUpdate();
+    }
+  }
+
+  public void updateAge(String age) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "UPDATE animals SET age = :age WHERE id = :id";
+      con.createQuery(sql)
+        .addParameter("age", age)
         .addParameter("id", this.id)
         .executeUpdate();
     }

@@ -84,4 +84,12 @@ public class EndangeredAnimalTest {
     animal.updateHealth("ill");
     assertEquals(EndangeredAnimal.find(animal.getId()).getHealth(), "ill");
   }
+
+  @Test
+  public void updateAge_updatesAge() {
+    EndangeredAnimal animal = new EndangeredAnimal("Rattlesnake", "healthy", "young");
+    animal.save();
+    animal.updateAge("adult");
+    assertEquals("adult", EndangeredAnimal.find(animal.getId()).getAge());
+  }
 }
