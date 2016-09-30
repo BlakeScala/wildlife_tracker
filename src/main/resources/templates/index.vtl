@@ -1,0 +1,17 @@
+<div class = "jumbotron">
+  <h1>Wildlife Tracker</h1>
+</div>
+
+<form action="/add-sighting">
+  <button type="submit" class="btn">Add Animal Sighting</button>
+</form>
+
+<form action="sightings">
+  <button type="submit" class="btn">All Animal Sightings</button>
+</form>
+
+#foreach ($animal in $animals)
+  <div class="sighting-div">
+    <h3>
+    <h3>$sighting.getLocation()</
+    <h3>$sighting.getRangerName()</h3>
