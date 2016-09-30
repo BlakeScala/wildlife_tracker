@@ -39,4 +39,11 @@ public class SightingTest {
     Sighting sightingTwo = new Sighting("Near the river", "Jerry", 2);
     assertTrue(sighting.equals(sightingTwo));
   }
+
+  @Test
+  public void save_savesSightingToDatabase() {
+    Sighting sighting = new Sighting("Near the river", "Jerry", 2);
+    sighting.save();
+    assertEquals(Sighting.all().get(0), sighting);
+  }
 }

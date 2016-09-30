@@ -53,4 +53,25 @@ public class Sighting {
              this.getTime().equals(newSighting.getTime());
     }
   }
+
+  public void save() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "INSERT INTO sightings (location, rangerName, animalId, time) VALUES (:location, :rangerName, :animalId, :time)";
+      this.id = (int) con.createQuery(sql, true)
+      .addParameter("location", this.location)
+      .addParameter("time", this.time)
+      .addParameter("rangerName", this.rangerName)
+      .addParameter("animalId", this.animalId)
+      .executeUpdate()
+      .getKey();
+    }
+  }
+
+  public static List<Sighting> all() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM sightings";
+      return con.createQuery(sql)
+        .executeAndFetch(Sighting.class);
+    }
+  }
 }
