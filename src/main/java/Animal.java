@@ -14,6 +14,10 @@ public class Animal {
     return name;
   }
 
+  public int getId() {
+    return this.id;
+  }
+
   @Override
   public boolean equals(Object otherAnimal) {
     if (!(otherAnimal instanceof Animal)) {
@@ -21,6 +25,14 @@ public class Animal {
     } else {
       Animal newAnimal = (Animal) otherAnimal;
       return this.getName().equals(newAnimal.getName());
+    }
+  }
+
+  public List<Animal> all() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM animals";
+      return con.createQuery(sql)
+        .executeAndFetch(Animal.class);
     }
   }
 }
