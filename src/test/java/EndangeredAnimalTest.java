@@ -74,5 +74,14 @@ public class EndangeredAnimalTest {
     EndangeredAnimal animal = new EndangeredAnimal("Rattlesnake", "healthy", "adult");
     animal.save();
     animal.updateName("Diamondback Rattlesnake");
+    assertEquals(animal.getName(), "Diamondback Rattlesnake");
+  }
+
+  @Test
+  public void updateHealth_updatesHealth() {
+    EndangeredAnimal animal = new EndangeredAnimal("Rattlesnake", "healthy", "adult");
+    animal.save();
+    animal.updateHealth("ill");
+    assertEquals(EndangeredAnimal.find(animal.getId()).getHealth(), "ill");
   }
 }
