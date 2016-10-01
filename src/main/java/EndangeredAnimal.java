@@ -6,13 +6,13 @@ public class EndangeredAnimal extends Animal {
   private String health;
   private String age;
 
-  public static final String HEALTH_HEALTHY = "healthy";
-  public static final String HEALTH_OKAY = "okay";
-  public static final String HEALTH_ILL = "ill";
-  public static final String AGE_NEWBORN = "newborn";
-  public static final String AGE_YOUNG = "young";
-  public static final String AGE_ADULT = "adult";
-  public static final String DATABASE_TYPE = "endangered";
+  public static final String HEALTH_HEALTHY = "Healthy";
+  public static final String HEALTH_OKAY = "Okay";
+  public static final String HEALTH_ILL = "Ill";
+  public static final String AGE_NEWBORN = "Newborn";
+  public static final String AGE_YOUNG = "Young";
+  public static final String AGE_ADULT = "Adult";
+  public static final String DATABASE_TYPE = "Endangered";
 
   public EndangeredAnimal(String name, String health, String age) {
     super(name);
@@ -35,27 +35,15 @@ public class EndangeredAnimal extends Animal {
 
   public static List<EndangeredAnimal> allEndangered() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "SELECT * FROM animals WHERE type = 'endangered';";
+      String sql = "SELECT * FROM animals WHERE type = 'Endangered';";
       return con.createQuery(sql)
         .executeAndFetch(EndangeredAnimal.class);
-    }
-  }
-
-  public boolean endangeredAnimalIsOkay(String healthLevel) {
-    if (healthLevel == HEALTH_ILL) {
-      return false;
-    } else {
-      return true;
     }
   }
 
   @Override
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      if(name.equals(""))
-      {
-        throw new UnsupportedOperationException("Please enter a species of animal!");
-      }
       String sql = "INSERT INTO animals (name, type, health, age) VALUES (:name, :type, :health, :age)";
       this.id = (int) con.createQuery(sql, true)
         .addParameter("name", this.name)

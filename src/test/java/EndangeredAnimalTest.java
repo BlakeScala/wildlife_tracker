@@ -101,17 +101,9 @@ public class EndangeredAnimalTest {
     assertEquals(null, EndangeredAnimal.find(animal.getId()));
   }
 
-  @Test
-  public void endangeredAnimalIsOkay_returnsFalseIfAnimalIsIll() {
-    EndangeredAnimal animal = new EndangeredAnimal("Rattlesnake", "ill", "young");
+  @Test(excepted = IllegalArgumentException.class)
+  public void save_throwsExceptionIfNameIsEmpty() {
+    EndangeredAnimal animal = new EndangeredAnimal("", "not doing well", "young");
     animal.save();
-    animal.endangeredAnimalIsOkay("ill");
-    assertEquals(false, animal.endangeredAnimalIsOkay("ill"));
   }
-
-  // @Test(excepted = IllegalArgumentException.class)
-  // public void save_throwsExceptionIfArgumentIsNotAConstant() {
-  //   EndangeredAnimal animal = new EndangeredAnimal("Rattlesnake", "not doing well", "young");
-  //   animal.save();
-  // }
 }

@@ -11,6 +11,10 @@ public class Animal {
   public Animal(String name) {
     this.name = name;
     type = DATABASE_TYPE;
+    if(name.equals(""))
+    {
+      throw new UnsupportedOperationException("Please enter a species of animal!");
+    }
   }
 
   public String getName() {
@@ -51,10 +55,6 @@ public class Animal {
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      if(name.equals(""))
-      {
-        throw new UnsupportedOperationException("Please enter a species of animal!");
-      }
       String sql = "INSERT INTO animals (name, type) VALUES (:name, :type)";
       this.id = (int) con.createQuery(sql, true)
         .addParameter("name", this.name)
