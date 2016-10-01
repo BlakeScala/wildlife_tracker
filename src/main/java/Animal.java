@@ -40,8 +40,21 @@ public class Animal {
     }
   }
 
+  public static List<Animal> allNotEndangered() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM animals WHERE type='not endangered'";
+      return con.createQuery(sql)
+        .throwOnMappingFailure(false)
+        .executeAndFetch(Animal.class);
+    }
+  }
+
   public void save() {
     try(Connection con = DB.sql2o.open()) {
+      if(name.equals(""))
+      {
+        throw new UnsupportedOperationException("Please enter a species of animal!");
+      }
       String sql = "INSERT INTO animals (name, type) VALUES (:name, :type)";
       this.id = (int) con.createQuery(sql, true)
         .addParameter("name", this.name)

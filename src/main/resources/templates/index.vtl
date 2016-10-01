@@ -2,16 +2,52 @@
   <h1>Wildlife Tracker</h1>
 </div>
 
-<form action="/add-sighting">
-  <button type="submit" class="btn">Add Animal Sighting</button>
-</form>
-
-<form action="sightings">
-  <button type="submit" class="btn">All Animal Sightings</button>
-</form>
-
-#foreach ($animal in $animals)
-  <div class="sighting-div">
-    <h3>
-    <h3>$sighting.getLocation()</
-    <h3>$sighting.getRangerName()</h3>
+<div class="row">
+  <div class="col-md-6">
+    <h3>Animals</h3>
+    <form action="/new-animal" method="post">
+      <div class="form-group">
+        <label for="animal-name">Animal Name</label>
+        <input type="text" name="animal-name" id="animal-name">
+      </div>
+      <button type="submit" name="button">Submit</button>
+    </form>
+    #foreach($animal in $animals)
+      <div class="animal-panel">
+        <h4>$animal.getName()</h4>
+      </div>
+    #end
+  </div>
+  <div class="col-md-6">
+    <h3>Endangered Animals</h3>
+    <form action="/new-endangered-animal" method="post">
+      <div class="form-group">
+        <label for="end-animal-name"></label>
+        <input type="text" name="end-animal-name" id="end-animal-name">
+      </div>
+      <div class="form-group">
+        <label for="end-animal-health">Animal Health</label>
+        <select name="end-animal-health">
+          <option value=1>Healthy</option>
+          <option value=2>Okay</option>
+          <option value=3>Sick</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="end-animal-age">Animal Age</label>
+        <select name="end-animal-age">
+          <option value=1>Newborn</option>
+          <option value=2>Young</option>
+          <option value=3>Adult</option>
+        </select>
+      </div>
+      <button type="submit" name="button">Submit</button>
+    </form>
+    #foreach($endangeredAnimal in $endangeredAnimals)
+      <div class="end-animal-panel">
+        <h4>$endangeredAnimal.getName()</h4>
+        <p>Health: $endangeredAnimal.getHealth() -- Age: $endangeredAnimal.getAge()</p>
+      </div>
+    #end
+  </div>
+</div>

@@ -77,4 +77,13 @@ public class AnimalTest {
     animal.getSightings().contains(sighting);
     animal.getSightings().contains(sightingTwo);
   }
+
+  @Test
+  public void allNotEndangered_onlyReturnsNotEndangeredAnimals() {
+    Animal animal = new Animal("Brown Bear");
+    EndangeredAnimal animalTwo = new EndangeredAnimal("Rattlesnake", "healthy", "adult");
+    animal.save();
+    animalTwo.save();
+    assertEquals(Animal.allNotEndangered().size(), 1);
+  }
 }
