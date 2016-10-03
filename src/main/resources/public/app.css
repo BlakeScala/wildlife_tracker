@@ -1,0 +1,22 @@
+.jumbotron {
+  text-align: center;
+  font-family: cursive;
+  font-size: 112px;
+  text-shadow: 0 0 10px white;
+  background-color: darkgrey;
+  width: 100%;
+}
+
+#jumbotitle {
+  color: black;
+}
+
+body{
+  background-color: lightgrey;
+}
+
+.col-md-5 {
+  background-color: white;
+  padding: 15px;
+  border: 2px solid black;
+}
