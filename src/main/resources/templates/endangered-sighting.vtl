@@ -1,0 +1,13 @@
+<div class = "jumbotron">
+  <h1 id="jumbotitle"><a href="/">Wildlife Tracker</a></h1>
+</div>
+
+<form action="/endangered-animal/$animal.getId()/sighting/$sighting.getId()/delete" method="post">
+  <button type="submit" name="button">Delete Sighting</button>
+</form>
+
+<h1>Sighting Information</h1>
+<h3>Animal: $animal.getName() -- Age: $animal.getAge() -- Condition: $animal.getHealth()</h3>
+<h3>Ranger: $sighting.getRangerName()</h3>
+<h3>Location: $sighting.getLocation()</h3>
+<h3>Time: $sighting.getTime()</h3>

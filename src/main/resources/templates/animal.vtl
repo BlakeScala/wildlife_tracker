@@ -4,6 +4,10 @@
 
 <h1>$animal.getName() Sightings</h1>
 
+<form action="/animal/$animal.getId()/delete" method="post">
+  <button type="submit" name="button">Delete Animal</button>
+</form>
+
 <form action="/animal/$animal.getId()/new-sighting" method="post">
   <div class="form-group">
     <label for="rangerName">Name of Ranger</label>
