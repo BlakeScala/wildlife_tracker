@@ -80,4 +80,12 @@ public class SightingTest {
     sighting.delete();
     assertEquals(null, Sighting.find(sighting.getId()));
   }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void save_throwsExceptionIfFormIsIncomplete() {
+    EndangeredAnimal animal = new EndangeredAnimal("Bear", "healthy", "young");
+    animal.save();
+    Sighting sighting = new Sighting("", "Jerry", animal.getId());
+    sighting.save();
+  }
 }

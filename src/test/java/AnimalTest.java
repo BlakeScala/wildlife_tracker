@@ -86,4 +86,10 @@ public class AnimalTest {
     animalTwo.save();
     assertEquals(Animal.allNotEndangered().size(), 1);
   }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void save_throwsExceptionIfNameIsEmpty() {
+    Animal animal = new Animal("");
+    animal.save();
+  }
 }

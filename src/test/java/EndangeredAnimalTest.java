@@ -101,7 +101,7 @@ public class EndangeredAnimalTest {
     assertEquals(null, EndangeredAnimal.find(animal.getId()));
   }
 
-  @Test(excepted = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void save_throwsExceptionIfNameIsEmpty() {
     EndangeredAnimal animal = new EndangeredAnimal("", "not doing well", "young");
     animal.save();

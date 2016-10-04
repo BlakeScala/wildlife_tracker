@@ -23,8 +23,8 @@ public class App {
     post("/new-animal", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       String animalName = request.queryParams("animal-name");
+      Animal animal = new Animal(animalName);
       try {
-        Animal animal = new Animal(animalName);
         animal.save();
       }
       catch(IllegalArgumentException exception)
@@ -56,8 +56,8 @@ public class App {
       } else if (inputEndAnimalHealth == 3) {
         endAnimalHealth = EndangeredAnimal.HEALTH_ILL;
       }
+      EndangeredAnimal endAnimal = new EndangeredAnimal(endAnimalName, endAnimalHealth, endAnimalAge);
       try{
-        EndangeredAnimal endAnimal = new EndangeredAnimal(endAnimalName, endAnimalHealth, endAnimalAge);
         endAnimal.save();
       }
       catch(IllegalArgumentException exception) { }
@@ -110,7 +110,10 @@ public class App {
       String rangerName = request.queryParams("rangerName");
       int animalId = animal.getId();
       Sighting sighting = new Sighting(location, rangerName, animalId);
-      sighting.save();
+      try{
+        sighting.save();
+      }
+      catch (IllegalArgumentException exception) { }
       model.put("template", "templates/animal.vtl");
       model.put("animal", animal);
       model.put("sightings", animal.getSightings());
@@ -124,7 +127,10 @@ public class App {
       String rangerName = request.queryParams("rangerName");
       int animalId = endAnimal.getId();
       Sighting sighting = new Sighting(location, rangerName, animalId);
-      sighting.save();
+      try{
+        sighting.save();
+      }
+      catch (IllegalArgumentException exception) { }
       model.put("template", "templates/endangered-animal.vtl");
       model.put("endangeredAnimal", endAnimal);
       model.put("sightings", endAnimal.getSightings());

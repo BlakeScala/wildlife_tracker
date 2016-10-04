@@ -56,6 +56,10 @@ public class Sighting {
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
+      if(this.rangerName.equals("") || this.location.equals(""))
+      {
+        throw new IllegalArgumentException("Please fill out the sighting form completely!");
+      }
       String sql = "INSERT INTO sightings (location, rangerName, animalId, time) VALUES (:location, :rangerName, :animalId, :time)";
       this.id = (int) con.createQuery(sql, true)
       .addParameter("location", this.location)

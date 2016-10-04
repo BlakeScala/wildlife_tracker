@@ -11,7 +11,7 @@ _Application to record sightings of animals in an area of wilderness_
 * In PSQL:
 * CREATE DATABASE wildlife_tracker;
 * CREATE TABLE animals (id serial PRIMARY KEY, name varchar, type varchar, health varchar, age varchar);
-* CREATE TABLE sightings (id serial PRIMARY KEY, location varchar, rangerName varchar, time timestamp, int animalid);
+* CREATE TABLE sightings (id serial PRIMARY KEY, location varchar, rangerName varchar, time timestamp, animalid int);
 * CREATE DATABASE wildlife_tracker_test WITH TEMPLATE wildlife_tracker;
 
 * _Clone the github repository_
