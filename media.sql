@@ -39,7 +39,10 @@ SET default_with_oids = false;
 
 CREATE TABLE animals (
     id integer NOT NULL,
-    name character varying
+    name character varying,
+    type character varying,
+    health character varying,
+    age character varying
 );
 
 
@@ -67,144 +70,6 @@ ALTER SEQUENCE animals_id_seq OWNED BY animals.id;
 
 
 --
--- Name: categories; Type: TABLE; Schema: public; Owner: Blake
---
-
-CREATE TABLE categories (
-    id integer NOT NULL,
-    name character varying
-);
-
-
-ALTER TABLE categories OWNER TO "Blake";
-
---
--- Name: categories_id_seq; Type: SEQUENCE; Schema: public; Owner: Blake
---
-
-CREATE SEQUENCE categories_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE categories_id_seq OWNER TO "Blake";
-
---
--- Name: categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Blake
---
-
-ALTER SEQUENCE categories_id_seq OWNED BY categories.id;
-
-
---
--- Name: comments; Type: TABLE; Schema: public; Owner: Blake
---
-
-CREATE TABLE comments (
-    id integer NOT NULL,
-    comment character varying,
-    "time" timestamp without time zone,
-    post_id integer
-);
-
-
-ALTER TABLE comments OWNER TO "Blake";
-
---
--- Name: comments_id_seq; Type: SEQUENCE; Schema: public; Owner: Blake
---
-
-CREATE SEQUENCE comments_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE comments_id_seq OWNER TO "Blake";
-
---
--- Name: comments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Blake
---
-
-ALTER SEQUENCE comments_id_seq OWNED BY comments.id;
-
-
---
--- Name: posts; Type: TABLE; Schema: public; Owner: Blake
---
-
-CREATE TABLE posts (
-    id integer NOT NULL,
-    information character varying,
-    title character varying,
-    "time" timestamp without time zone,
-    category_id integer
-);
-
-
-ALTER TABLE posts OWNER TO "Blake";
-
---
--- Name: posts_categories; Type: TABLE; Schema: public; Owner: Blake
---
-
-CREATE TABLE posts_categories (
-    id integer NOT NULL,
-    post_id integer,
-    category_id integer
-);
-
-
-ALTER TABLE posts_categories OWNER TO "Blake";
-
---
--- Name: posts_categories_id_seq; Type: SEQUENCE; Schema: public; Owner: Blake
---
-
-CREATE SEQUENCE posts_categories_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE posts_categories_id_seq OWNER TO "Blake";
-
---
--- Name: posts_categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Blake
---
-
-ALTER SEQUENCE posts_categories_id_seq OWNED BY posts_categories.id;
-
-
---
--- Name: posts_id_seq; Type: SEQUENCE; Schema: public; Owner: Blake
---
-
-CREATE SEQUENCE posts_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE posts_id_seq OWNER TO "Blake";
-
---
--- Name: posts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Blake
---
-
-ALTER SEQUENCE posts_id_seq OWNED BY posts.id;
-
-
---
 -- Name: sightings; Type: TABLE; Schema: public; Owner: Blake
 --
 
@@ -212,7 +77,8 @@ CREATE TABLE sightings (
     id integer NOT NULL,
     location character varying,
     rangername character varying,
-    animal_id integer
+    "time" timestamp without time zone,
+    animalid integer
 );
 
 
@@ -250,34 +116,6 @@ ALTER TABLE ONLY animals ALTER COLUMN id SET DEFAULT nextval('animals_id_seq'::r
 -- Name: id; Type: DEFAULT; Schema: public; Owner: Blake
 --
 
-ALTER TABLE ONLY categories ALTER COLUMN id SET DEFAULT nextval('categories_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: Blake
---
-
-ALTER TABLE ONLY comments ALTER COLUMN id SET DEFAULT nextval('comments_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: Blake
---
-
-ALTER TABLE ONLY posts ALTER COLUMN id SET DEFAULT nextval('posts_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: Blake
---
-
-ALTER TABLE ONLY posts_categories ALTER COLUMN id SET DEFAULT nextval('posts_categories_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: Blake
---
-
 ALTER TABLE ONLY sightings ALTER COLUMN id SET DEFAULT nextval('sightings_id_seq'::regclass);
 
 
@@ -285,7 +123,13 @@ ALTER TABLE ONLY sightings ALTER COLUMN id SET DEFAULT nextval('sightings_id_seq
 -- Data for Name: animals; Type: TABLE DATA; Schema: public; Owner: Blake
 --
 
-COPY animals (id, name) FROM stdin;
+COPY animals (id, name, type, health, age) FROM stdin;
+1	Diamondback Rattlesnake	endangered	Healthy	Young
+2	Bear	animal	\N	\N
+3	Bear	animal	\N	\N
+4	blah	animal	\N	\N
+5	Blahahh	endangeredanimal	healthy	newborn
+7	Try	endangered	1	1
 \.
 
 
@@ -293,74 +137,21 @@ COPY animals (id, name) FROM stdin;
 -- Name: animals_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Blake
 --
 
-SELECT pg_catalog.setval('animals_id_seq', 1, false);
-
-
---
--- Data for Name: categories; Type: TABLE DATA; Schema: public; Owner: Blake
---
-
-COPY categories (id, name) FROM stdin;
-\.
-
-
---
--- Name: categories_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Blake
---
-
-SELECT pg_catalog.setval('categories_id_seq', 1, false);
-
-
---
--- Data for Name: comments; Type: TABLE DATA; Schema: public; Owner: Blake
---
-
-COPY comments (id, comment, "time", post_id) FROM stdin;
-\.
-
-
---
--- Name: comments_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Blake
---
-
-SELECT pg_catalog.setval('comments_id_seq', 1, false);
-
-
---
--- Data for Name: posts; Type: TABLE DATA; Schema: public; Owner: Blake
---
-
-COPY posts (id, information, title, "time", category_id) FROM stdin;
-\.
-
-
---
--- Data for Name: posts_categories; Type: TABLE DATA; Schema: public; Owner: Blake
---
-
-COPY posts_categories (id, post_id, category_id) FROM stdin;
-\.
-
-
---
--- Name: posts_categories_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Blake
---
-
-SELECT pg_catalog.setval('posts_categories_id_seq', 1, false);
-
-
---
--- Name: posts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Blake
---
-
-SELECT pg_catalog.setval('posts_id_seq', 1, false);
+SELECT pg_catalog.setval('animals_id_seq', 45, true);
 
 
 --
 -- Data for Name: sightings; Type: TABLE DATA; Schema: public; Owner: Blake
 --
 
-COPY sightings (id, location, rangername, animal_id) FROM stdin;
+COPY sightings (id, location, rangername, "time", animalid) FROM stdin;
+1	NE Quadrant	\N	2016-09-30 12:31:35.074	1
+2	NE Quadrant	Joe	2016-10-02 19:23:42.599	6
+3	NE Quadrant	Joe	2016-10-02 19:25:04.874	6
+4	NE Quadrant	Joe	2016-10-03 07:40:32.557	32
+5	NE Quadrant	blah	2016-10-03 07:41:39.065	20
+6	NE Quadrant	Joe	2016-10-03 19:23:22.78	10
+7	NE Quadrant	Joe	2016-10-03 19:23:56.706	8
 \.
 
 
@@ -368,7 +159,7 @@ COPY sightings (id, location, rangername, animal_id) FROM stdin;
 -- Name: sightings_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Blake
 --
 
-SELECT pg_catalog.setval('sightings_id_seq', 1, false);
+SELECT pg_catalog.setval('sightings_id_seq', 15, true);
 
 
 --
@@ -377,38 +168,6 @@ SELECT pg_catalog.setval('sightings_id_seq', 1, false);
 
 ALTER TABLE ONLY animals
     ADD CONSTRAINT animals_pkey PRIMARY KEY (id);
-
-
---
--- Name: categories_pkey; Type: CONSTRAINT; Schema: public; Owner: Blake
---
-
-ALTER TABLE ONLY categories
-    ADD CONSTRAINT categories_pkey PRIMARY KEY (id);
-
-
---
--- Name: comments_pkey; Type: CONSTRAINT; Schema: public; Owner: Blake
---
-
-ALTER TABLE ONLY comments
-    ADD CONSTRAINT comments_pkey PRIMARY KEY (id);
-
-
---
--- Name: posts_categories_pkey; Type: CONSTRAINT; Schema: public; Owner: Blake
---
-
-ALTER TABLE ONLY posts_categories
-    ADD CONSTRAINT posts_categories_pkey PRIMARY KEY (id);
-
-
---
--- Name: posts_pkey; Type: CONSTRAINT; Schema: public; Owner: Blake
---
-
-ALTER TABLE ONLY posts
-    ADD CONSTRAINT posts_pkey PRIMARY KEY (id);
 
 
 --
