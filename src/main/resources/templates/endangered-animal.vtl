@@ -2,9 +2,9 @@
   <h1 id="jumbotitle"><a href="/">Wildlife Tracker</a></h1>
 </div>
 
-<h1>$animal.getName() Sightings</h1>
+<h1>$endangeredAnimal.getName() Sightings</h1>
 
-<form action="/animal/$animal.getId()/new-sighting" method="post">
+<form action="/endangered-animal/$endangeredAnimal.getId()/new-sighting" method="post">
   <div class="form-group">
     <label for="rangerName">Name of Ranger</label>
     <input name="rangerName" type="text" id="rangerName">
@@ -17,5 +17,5 @@
 </form>
 
 #foreach ($sighting in $sightings)
-  <p><a href="/animal/$animal.getId()/sighting/$sighting.getId()">$sighting.getTime(): Sighting by $sighting.getRangerName() - $sighting.getLocation()</a></p>
+  <p><a href="/endangered-animal/$endangeredAnimal.getId()/sighting/$sighting.getId()">$sighting.getTime(): Sighting by $sighting.getRangerName() - $sighting.getLocation()</a></p>
 #end

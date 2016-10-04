@@ -98,5 +98,19 @@ public class App {
       model.put("sightings", animal.getSightings());
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
+
+    post("/endangered-animal/:id/new-sighting", (request,response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      EndangeredAnimal endAnimal = EndangeredAnimal.find(Integer.parseInt(request.params(":id")));
+      String location = request.queryParams("location");
+      String rangerName = request.queryParams("rangerName");
+      int animalId = endAnimal.getId();
+      Sighting sighting = new Sighting(location, rangerName, animalId);
+      sighting.save();
+      model.put("template", "templates/endangered-animal.vtl");
+      model.put("endangeredAnimal", endAnimal);
+      model.put("sightings", endAnimal.getSightings());
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
   }
 }
